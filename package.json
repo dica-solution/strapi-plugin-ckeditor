@@ -52,7 +52,6 @@
     "@ckeditor/ckeditor5-media-embed": "^36.0.0",
     "@ckeditor/ckeditor5-page-break": "^36.0.0",
     "@ckeditor/ckeditor5-paragraph": "^36.0.0",
-    "@ckeditor/ckeditor5-paste-from-office": "^36.0.0",
     "@ckeditor/ckeditor5-remove-format": "^36.0.0",
     "@ckeditor/ckeditor5-special-characters": "^36.0.0",
     "@ckeditor/ckeditor5-source-editing": "^36.0.0",
@@ -62,7 +61,8 @@
     "@ckeditor/ckeditor5-upload": "^36.0.0",
     "@ckeditor/ckeditor5-word-count": "^36.0.0",
     "sanitize-html": "^2.8.1",
-    "@_sh/ckeditor5-font-with-picker": "^0.0.1"
+    "@_sh/ckeditor5-font-with-picker": "^0.0.1",
+    "@ckeditor/ckeditor5-paste-from-office": "https://github.com/dica-solution/ckeditor5-paste-from-office.git"
   },
   "peerDependencies": {
     "@strapi/strapi": "^4.4.0"
