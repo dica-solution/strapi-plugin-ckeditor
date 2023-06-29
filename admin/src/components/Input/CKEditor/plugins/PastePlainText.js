@@ -38,12 +38,12 @@ const cleanHTML = (input) => {
   // Replacement string
   const replacement_normal = '<span class="math-tex">$1</span>';
 
-  const replacement_$ = `<span class="math-tex">\($1\)</span>`;
-  const replacement_$$ = `<span class="math-tex">\[$1\]</span>`;
+  // const replacement_$ = `<span class="math-tex">\($1\)</span>`;
+  // const replacement_$$ = `<span class="math-tex">\[$1\]</span>`;
 
   return input
-    .replace(regex_$$, replacement_$$)
-    .replace(regex_$, replacement_$)
+    .replace(regex_$$, replacement_normal)
+    .replace(regex_$, replacement_normal)
     .replace(regex_normal_1, replacement_normal)
     .replace(regex_normal_2, replacement_normal);
 };
