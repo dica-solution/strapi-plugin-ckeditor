@@ -28,27 +28,27 @@ const plainTextToHtml = (text) => {
   return text;
 };
 
-const regex_normal_1 = /(\\\[\S*?.+?\S*?\\\])/g;
+const regexNormal1 = /(\\\[\S*?.+?\S*?\\\])/g;
 
-const regex_normal_2 = /(\\\(\S*?.+?\S*?\\\))/g;
-const regex_$ = /\$(\S*?.+?\S*?)\$/g;
+const regexNormal2 = /(\\\(\S*?.+?\S*?\\\))/g;
+const regex$ = /\$(\S*?.+?\S*?)\$/g;
 
-const regex_$$ = /\$\$(\S*?.+?\S*?)\$\$/g;
-const regex_$$_n = /\$\$\n(\S*?.+?\S*?)\n\$\$/g;
+const regex$$ = /\$\$(\S*?.+?\S*?)\$\$/g;
+const regex$$n = /\$\$\n(\S*?.+?\S*?)\n\$\$/g;
 
 const cleanHTML = (input) => {
   // Replacement string
-  const replacement_normal = '<span class="math-tex">$1</span>';
+  const replacementNormal = '<span class="math-tex">$1</span>';
 
   // const replacement_$ = `<span class="math-tex">$1</span>`;
-  const replacement_$$ = `<span class="math-tex">\[$1\]</span>`;
+  const replacement$$ = `<span class="math-tex">\[$1\]</span>`;
 
   return input
-    .replace(regex_$$_n, replacement_$$)
-    .replace(regex_$$, replacement_normal)
-    .replace(regex_$, replacement_normal)
-    .replace(regex_normal_1, replacement_normal)
-    .replace(regex_normal_2, replacement_normal)
+    .replace(regex$$n, replacement$$)
+    .replace(regex$$, replacementNormal)
+    .replace(regex$, replacementNormal)
+    .replace(regexNormal1, replacementNormal)
+    .replace(regexNormal2, replacementNormal)
     .replace(
       /<span class="math-tex">(.*?)<\/span>/g,
       function (match, content) {
@@ -59,11 +59,11 @@ const cleanHTML = (input) => {
     );
 };
 
-const googleDocsMatch = /id=("|')docs-internal-guid-[-0-9a-f]+("|')/i;
-const googleSheetsMatch = /<google-sheets-html-origin/i;
-const msWordMatch1 =
-  /<meta\s*name="?generator"?\s*content="?microsoft\s*word\s*\d+"?\/?>/i;
-const msWordMatch2 = /xmlns:o="urn:schemas-microsoft-com/i;
+// const googleDocsMatch = /id=("|')docs-internal-guid-[-0-9a-f]+("|')/i;
+// const googleSheetsMatch = /<google-sheets-html-origin/i;
+// const msWordMatch1 =
+//   /<meta\s*name="?generator"?\s*content="?microsoft\s*word\s*\d+"?\/?>/i;
+// const msWordMatch2 = /xmlns:o="urn:schemas-microsoft-com/i;
 
 export default class PastePlainTextPlugin extends Plugin {
   static get pluginName() {
@@ -89,29 +89,34 @@ export default class PastePlainTextPlugin extends Plugin {
       //   return;
       // }
       const dataTransfer = data.dataTransfer;
-      const html_text_content = dataTransfer.getData("text/html");
+      const htmlTextContent = dataTransfer.getData("text/html");
 
-      const isMatchMSWord =
-        msWordMatch1.test(html_text_content) ||
-        msWordMatch2.test(html_text_content);
-      const isMathSheet = googleSheetsMatch.test(html_text_content);
-      const isMathGGDoc = googleDocsMatch.test(html_text_content);
-      //skip content paste from Google docs & paste content from ckeditor was converted -> System handle
+      // const isMatchMSWord =
+      //   msWordMatch1.test(htmlTextContent) ||
+      //   msWordMatch2.test(htmlTextContent);
+      // const isMathSheet = googleSheetsMatch.test(htmlTextContent);
+      // const isMathGGDoc = googleDocsMatch.test(htmlTextContent);
+      //
 
-      const isNormalize = isMathGGDoc || isMathSheet || isMatchMSWord;
+      // const isNormalize = isMathGGDoc || isMathSheet || isMatchMSWord;
 
       const isFomular =
-        regex_normal_1.test(html_text_content) ||
-        regex_normal_2.test(html_text_content) ||
-        regex_$.test(html_text_content) ||
-        regex_$$.test(html_text_content) ||
-        regex_$$_n.test(html_text_content);
+        regexNormal1.test(htmlTextContent) ||
+        regexNormal2.test(htmlTextContent) ||
+        regex$.test(htmlTextContent) ||
+        regex$$.test(htmlTextContent) ||
+        regex$$n.test(htmlTextContent);
 
-      if (!isNormalize && !html_text_content.includes("math-tex") && isFomular) {
-        const plain_text_content = plainTextToHtml(
+      //skip content paste from Google docs & paste content from ckeditor was converted -> System handle
+      if (
+        (!htmlTextContent || isFomular) &&
+        !htmlTextContent.includes("math-tex")
+      ) {
+        const plainTextContent = plainTextToHtml(
           dataTransfer.getData("text/plain")
         );
-        const _html = cleanHTML(plain_text_content);
+        console.log({plainTextContent});
+        const _html = cleanHTML(plainTextContent);
         data.content = this.editor.data.htmlProcessor.toView(_html);
       }
     });
