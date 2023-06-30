@@ -28,24 +28,35 @@ const plainTextToHtml = (text) => {
   return text;
 };
 
+const regex_normal_1 = /(\\\[\S*?.+?\S*?\\\])/g;
+
+const regex_normal_2 = /(\\\(\S*?.+?\S*?\\\))/g;
+const regex_$ = /\$(\S*?.+?\S*?)\$/g;
+
+const regex_$$ = /\$\$(\S*?.+?\S*?)\$\$/g;
+const regex_$$_n = /\$\$\n(\S*?.+?\S*?)\n\$\$/g;
+
 const cleanHTML = (input) => {
-  const regex_normal_1 = /(\\\[\S*?.+?\S*?\\\])/g;
-
-  const regex_normal_2 = /(\\\(\S*?.+?\S*?\\\))/g;
-  const regex_$ = /\$(\S*?.+?\S*?)\$/g;
-
-  const regex_$$ = /\$\$(\S*?.+?\S*?)\$\$/g;
   // Replacement string
   const replacement_normal = '<span class="math-tex">$1</span>';
 
-  // const replacement_$ = `<span class="math-tex">\($1\)</span>`;
-  // const replacement_$$ = `<span class="math-tex">\[$1\]</span>`;
+  // const replacement_$ = `<span class="math-tex">$1</span>`;
+  const replacement_$$ = `<span class="math-tex">\[$1\]</span>`;
 
   return input
+    .replace(regex_$$_n, replacement_$$)
     .replace(regex_$$, replacement_normal)
     .replace(regex_$, replacement_normal)
     .replace(regex_normal_1, replacement_normal)
-    .replace(regex_normal_2, replacement_normal);
+    .replace(regex_normal_2, replacement_normal)
+    .replace(
+      /<span class="math-tex">(.*?)<\/span>/g,
+      function (match, content) {
+        return (
+          '<span class="math-tex">' + content.replace(/<br>/g, "") + "</span>"
+        );
+      }
+    );
 };
 
 const googleDocsMatch = /id=("|')docs-internal-guid-[-0-9a-f]+("|')/i;
@@ -78,12 +89,7 @@ export default class PastePlainTextPlugin extends Plugin {
       //   return;
       // }
       const dataTransfer = data.dataTransfer;
-      const plain_text_content = plainTextToHtml(
-        dataTransfer.getData("text/plain")
-      );
-      const html_text_content = plainTextToHtml(
-        dataTransfer.getData("text/html")
-      );
+      const html_text_content = dataTransfer.getData("text/html");
 
       const isMatchMSWord =
         msWordMatch1.test(html_text_content) ||
@@ -94,11 +100,20 @@ export default class PastePlainTextPlugin extends Plugin {
 
       const isNormalize = isMathGGDoc || isMathSheet || isMatchMSWord;
 
-      if (!isNormalize && !html_text_content.includes("math-tex")) {
+      const isFomular =
+        regex_normal_1.test(html_text_content) ||
+        regex_normal_2.test(html_text_content) ||
+        regex_$.test(html_text_content) ||
+        regex_$$.test(html_text_content) ||
+        regex_$$_n.test(html_text_content);
+
+      if (!isNormalize && !html_text_content.includes("math-tex") && isFomular) {
+        const plain_text_content = plainTextToHtml(
+          dataTransfer.getData("text/plain")
+        );
         const _html = cleanHTML(plain_text_content);
         data.content = this.editor.data.htmlProcessor.toView(_html);
       }
     });
   }
 }
-
