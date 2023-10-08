@@ -115,7 +115,7 @@ export default class PastePlainTextPlugin extends Plugin {
         const plainTextContent = plainTextToHtml(
           dataTransfer.getData("text/plain")
         );
-        console.log({plainTextContent});
+
         const _html = cleanHTML(plainTextContent);
         data.content = this.editor.data.htmlProcessor.toView(_html);
       }
