@@ -346,6 +346,7 @@ const base = {
       "imageStyle:side",
       "|",
       "resizeImage",
+      "imageOCRLatex"
     ],
     insert: {
       integrations: ["insertImageViaUrl"],
