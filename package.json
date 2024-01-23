@@ -43,7 +43,7 @@
     "@ckeditor/ckeditor5-horizontal-line": "^36.0.0",
     "@ckeditor/ckeditor5-html-embed": "^36.0.0",
     "@ckeditor/ckeditor5-html-support": "^36.0.0",
-    "@ckeditor/ckeditor5-image": "https://github.com/dica-solution/ckeditor5-ckeditor-image.git#1dd0a1688b00de4ad6935edb53bd8f66e75ec714",
+    "@ckeditor/ckeditor5-image": "https://github.com/dica-solution/ckeditor5-ckeditor-image.git#5a218a3452c96a9d4e42d74f1affac9cd35690d7",
     "@ckeditor/ckeditor5-indent": "^36.0.0",
     "@ckeditor/ckeditor5-language": "^36.0.0",
     "@ckeditor/ckeditor5-link": "^36.0.0",

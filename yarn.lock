@@ -194,9 +194,9 @@
     ckeditor5 "^36.0.0"
     lodash-es "^4.17.15"
 
-"@ckeditor/ckeditor5-image@https://github.com/dica-solution/ckeditor5-ckeditor-image.git#1dd0a1688b00de4ad6935edb53bd8f66e75ec714":
+"@ckeditor/ckeditor5-image@https://github.com/dica-solution/ckeditor5-ckeditor-image.git#5a218a3452c96a9d4e42d74f1affac9cd35690d7":
   version "36.0.0"
-  resolved "https://github.com/dica-solution/ckeditor5-ckeditor-image.git#1dd0a1688b00de4ad6935edb53bd8f66e75ec714"
+  resolved "https://github.com/dica-solution/ckeditor5-ckeditor-image.git#5a218a3452c96a9d4e42d74f1affac9cd35690d7"
   dependencies:
     "@ckeditor/ckeditor5-ui" "^36.0.0"
     ckeditor5 "^36.0.0"
