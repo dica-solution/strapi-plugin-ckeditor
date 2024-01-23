@@ -194,10 +194,9 @@
     ckeditor5 "^36.0.0"
     lodash-es "^4.17.15"
 
-"@ckeditor/ckeditor5-image@^36.0.0":
+"@ckeditor/ckeditor5-image@https://github.com/dica-solution/ckeditor5-ckeditor-image.git#1dd0a1688b00de4ad6935edb53bd8f66e75ec714":
   version "36.0.0"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-image/-/ckeditor5-image-36.0.0.tgz#8db5da999324fe91265a2ebb072ec9df0a53e11a"
-  integrity sha512-wj7vEkfPFODKTeaTHSnjWox3JqYwDWJcu6IDhugdmwtTlXGg8LSDRXOW2y/Koyz58X5nuhDfJFznoZcdW3EHww==
+  resolved "https://github.com/dica-solution/ckeditor5-ckeditor-image.git#1dd0a1688b00de4ad6935edb53bd8f66e75ec714"
   dependencies:
     "@ckeditor/ckeditor5-ui" "^36.0.0"
     ckeditor5 "^36.0.0"
@@ -275,12 +274,11 @@
     "@ckeditor/ckeditor5-ui" "^36.0.0"
     "@ckeditor/ckeditor5-utils" "^36.0.0"
 
-"@ckeditor/ckeditor5-paste-from-office@^36.0.0":
-  version "36.0.0"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-paste-from-office/-/ckeditor5-paste-from-office-36.0.0.tgz#6020de7ec7ca6793057051eb48f77b72250875ad"
-  integrity sha512-h/iMHKaqf6DZl6XWSujmvFtnQaBBWdeCftxfchG1CqtlFdvAa+LHxPt3va/ZtUtuR4vONHRpsCTFmEGskpsZvw==
+"@ckeditor/ckeditor5-paste-from-office@https://github.com/dica-solution/ckeditor5-paste-from-office.git":
+  version "38.1.0"
+  resolved "https://github.com/dica-solution/ckeditor5-paste-from-office.git#e2b67ab8cb63cd36e4bc17946282d289826ca85e"
   dependencies:
-    ckeditor5 "^36.0.0"
+    ckeditor5 "38.1.0"
 
 "@ckeditor/ckeditor5-react@^5.0.6":
   version "5.0.6"
@@ -482,12 +480,6 @@
   dependencies:
     ckeditor5 "^36.0.0"
     lodash-es "^4.17.15"
-
-"@ckeditor5-paste-from-office@https://github.com/dica-solution/ckeditor5-paste-from-office.git":
-  version "38.1.0"
-  resolved "https://github.com/dica-solution/ckeditor5-paste-from-office.git#e2b67ab8cb63cd36e4bc17946282d289826ca85e"
-  dependencies:
-    ckeditor5 "38.1.0"
 
 ckeditor5@38.1.0:
   version "38.1.0"
